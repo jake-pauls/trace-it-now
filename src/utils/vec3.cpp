@@ -97,3 +97,12 @@ vec3 Normalize(vec3 v)
 {
     return v / v.Magnitude();
 }
+
+// Note: In the original this is 'WriteColor'
+// This code is refactored without use of the 'color' and 'point3' aliases
+void WriteVecToStream(std::ostream &out, vec3 pixelColor)
+{
+    out << static_cast<int>(255.999 * pixelColor.r()) << " "
+        << static_cast<int>(255.999 * pixelColor.g()) << " "   
+        << static_cast<int>(255.999 * pixelColor.b()) << "\n";
+}

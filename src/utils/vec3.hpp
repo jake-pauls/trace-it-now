@@ -32,6 +32,7 @@ public:
     // Utility Methods
     float Magnitude() const;
     float MagnitudeSquared() const;
+    
 
 public:
     float f[3];
@@ -48,10 +49,8 @@ friend vec3 operator/(vec3 v, float c);
 friend float Dot(const vec3 &u, const vec3 &v);
 friend vec3 Cross(const vec3 &u, const vec3 &v);
 friend vec3 Normalize(vec3 v);
-};
 
-// Type aliases for vec3
-using point3 = vec3;
-using color = vec3;
+friend void WriteVecToStream(std::ostream &out, vec3 pixelColor);
+};
 
 #endif /* vec3_hpp */
