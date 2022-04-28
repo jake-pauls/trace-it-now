@@ -8,14 +8,13 @@ project(trace-it-now
 )
 
 set(HEADER_FILES
-    src/utils/ray.hpp
-    src/utils/vec3.hpp
+    src/core/ray.hpp
+    src/core/vec3.hpp
     src/assert.hpp
 )
 
 set(SOURCE_FILES
-    src/utils/ray.cpp
-    src/utils/vec3.cpp
+    src/core/vec3.cpp
     src/main.cpp
 )
 
