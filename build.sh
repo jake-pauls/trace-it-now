@@ -5,7 +5,7 @@ mkdir -p build && cd build
 cmake ..
 make
 
-# Pipe pixel data output to .ppm file
+# Send pixel data output to .ppm file
 ./trace-it-now > image.ppm
 
 # Open image file (comment or modify this line for your image viewer)

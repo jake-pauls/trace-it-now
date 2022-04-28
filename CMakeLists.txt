@@ -7,10 +7,15 @@ project(trace-it-now
     LANGUAGES CXX
 )
 
+set(HEADER_FILES
+    src/utils/vec3.hpp
+    src/assert.hpp
+)
+
 set(SOURCE_FILES
-    src/Assert.hpp
+    src/utils/vec3.cpp
     src/main.cpp
 )
 
 set(EXECUTABLE_NAME trace-it-now)
-add_executable(${EXECUTABLE_NAME} ${SOURCE_FILES})
+add_executable(${EXECUTABLE_NAME} ${HEADER_FILES} ${SOURCE_FILES})
