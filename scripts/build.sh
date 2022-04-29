@@ -10,8 +10,8 @@ make
 # Send pixel data output to .ppm file
 ./trace-it-now > render.ppm
 
-# Open image file (comment or modify this line for your image viewer)
+# Optional: Open image file with image viewer
 feh render.ppm
 
-# Update repository README image
-cp build/render.ppm images/
+# Optional: Update repository README image (imagemagick)
+pnmtopng render.ppm > ../images/render.png

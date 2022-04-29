@@ -2,6 +2,6 @@
 
 ### Current Render
 
-<p align="center>
-    <img src="./images/render.ppm" alt="trace-it-now!" />
+<p align="center">
+    <br /><img src="./images/render.png" alt="trace-it-now" /><br />
 </p>
