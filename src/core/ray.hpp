@@ -1,5 +1,5 @@
-#ifndef ray_hpp
-#define ray_hpp
+#ifndef Ray_hpp 
+#define Ray_hpp 
 
 #include "vec3.hpp"
 
@@ -20,4 +20,4 @@ public:
     vec3 Direction;
 };
 
-#endif /* ray_hpp */
+#endif /* Ray_hpp */

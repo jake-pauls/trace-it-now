@@ -1,6 +1,13 @@
 #include "vec3.hpp"
 
-vec3 vec3::operator-() const 
+vec3::vec3() : f{0, 0, 0}
+{ }
+
+vec3::vec3(float f0, float f1, float f2)
+    : f{f0, f1, f2}
+{ }
+
+vec3 vec3::operator-() const
 {
     return vec3(-f[0], -f[1], -f[2]);
 }
@@ -8,7 +15,7 @@ vec3 vec3::operator-() const
 float vec3::operator[](int i) const
 {
     return f[i];
-} 
+}
 
 float& vec3::operator[](int i)
 {
@@ -36,7 +43,7 @@ vec3& vec3::operator/=(const float c)
     return *this *= 1/c;
 }
 
-float vec3::Magnitude() const 
+float vec3::Magnitude() const
 {
     return std::sqrt(MagnitudeSquared());
 }
@@ -103,6 +110,6 @@ vec3 Normalize(vec3 v)
 void WriteVecToStream(std::ostream &out, vec3 pixelColor)
 {
     out << static_cast<int>(255.999 * pixelColor.r()) << " "
-        << static_cast<int>(255.999 * pixelColor.g()) << " "   
+        << static_cast<int>(255.999 * pixelColor.g()) << " "
         << static_cast<int>(255.999 * pixelColor.b()) << "\n";
 }

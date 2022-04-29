@@ -10,11 +10,17 @@ project(trace-it-now
 set(HEADER_FILES
     src/core/ray.hpp
     src/core/vec3.hpp
+    src/core/constants.hpp
+    src/objects/sphere.hpp
+    src/hittable_list.hpp
+    src/hittable.hpp
     src/assert.hpp
 )
 
 set(SOURCE_FILES
+    src/objects/sphere.cpp
     src/core/vec3.cpp
+    src/hittable_list.cpp
     src/main.cpp
 )
 

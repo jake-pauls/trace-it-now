@@ -1,5 +1,7 @@
 #!/bin/sh
 # Simple build script to make project and output/read image file
+# Execute in the root of the project
+
 mkdir -p build && cd build
 
 cmake ..

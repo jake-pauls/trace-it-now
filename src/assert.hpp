@@ -1,5 +1,5 @@
-#ifndef assert_hpp
-#define assert_hpp
+#ifndef Assert_hpp 
+#define Assert_hpp 
 
 #include <iostream>
 #include <cstring>
@@ -12,4 +12,4 @@
 #define ELOG(x) \
     std::cerr << "[trace-it-now::e::" << __SHORT_NAME__ << "::" << __LINE__ << "] " << x << "\n" << std::flush;
 
-#endif /* assert_hpp */
+#endif /* Assert_hpp */

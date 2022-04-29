@@ -1,14 +1,14 @@
-#ifndef vec3_hpp
-#define vec3_hpp
+#ifndef Vec3_hpp
+#define Vec3_hpp
 
 #include <cmath>
 #include <iostream>
 
-class vec3 
+class vec3
 {
 public:
-    vec3() : f{0, 0, 0} {}
-    vec3(float f0, float f1, float f2) : f{f0, f1, f2} {}
+    vec3();
+    vec3(float f0, float f1, float f2);
 
     // Points
     float x() const { return f[0]; }
@@ -23,7 +23,7 @@ public:
     // Operator Overloads
     vec3 operator-() const;
     float operator[](int i) const;
-    float& operator[](int i); 
+    float& operator[](int i);
 
     vec3& operator+=(const vec3 &v);
     vec3& operator*=(const float c);
@@ -32,7 +32,7 @@ public:
     // Utility Methods
     float Magnitude() const;
     float MagnitudeSquared() const;
-    
+
 
 public:
     float f[3];
@@ -53,4 +53,4 @@ friend vec3 Normalize(vec3 v);
 friend void WriteVecToStream(std::ostream &out, vec3 pixelColor);
 };
 
-#endif /* vec3_hpp */
+#endif /* Vec3_hpp */
