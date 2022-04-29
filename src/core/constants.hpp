@@ -2,6 +2,7 @@
 #define Constants_hpp
 
 #include <cmath>
+#include <cstdlib>
 #include <limits>
 #include <memory>
 
@@ -24,5 +25,16 @@
 // Utility Functions
 
 inline float degToRad(float deg) { return deg * _PI_ / 180.0f; }
+
+inline float randomFloat() { return rand() / (RAND_MAX + 1.0); }
+
+inline float randomRange(float min, float max) { return min + (max - min) * randomFloat(); }
+
+inline float clamp(float x, float min, float max) 
+{
+    if (x < min) return min;
+    if (x > max) return max;
+    return x;
+}
 
 #endif /* Constants_hpp */

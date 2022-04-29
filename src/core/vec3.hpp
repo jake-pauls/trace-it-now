@@ -50,7 +50,7 @@ friend float Dot(const vec3 &u, const vec3 &v);
 friend vec3 Cross(const vec3 &u, const vec3 &v);
 friend vec3 Normalize(vec3 v);
 
-friend void WriteVecToStream(std::ostream &out, vec3 pixelColor);
+friend void WriteVecToStream(std::ostream &out, vec3 pixelColor, int samplesPerPixel);
 };
 
 #endif /* Vec3_hpp */

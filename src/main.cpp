@@ -1,8 +1,10 @@
 #include <iostream>
 
-#include "hittable_list.hpp"
+#include "core/camera.hpp"
 #include "core/constants.hpp"
 #include "objects/sphere.hpp"
+
+#include "hittable_list.hpp"
 
 vec3 getRayColor(const Ray& ray, const Hittable& world)
 {
@@ -24,15 +26,8 @@ vec3 getRayColor(const Ray& ray, const Hittable& world)
 
 int main()
 {
-    // Configure camera parameters
-    float viewportHeight = 2.0f;
-    float viewportWidth = ASPECT_RATIO * viewportHeight;
-    float focalLength = 1.0f;
-
-    vec3 origin(0.0f, 0.0f, 0.0f);
-    vec3 horizontal(viewportWidth, 0.0f, 0.0f);
-    vec3 vertical(0.0f, viewportHeight, 0.0f);
-    vec3 lowerLeftCorner = origin - (horizontal / 2) - (vertical / 2) - vec3(0.0f, 0.0f, focalLength);
+    Camera camera;
+    const int samplesPerPixel = 100;
 
     // Setup world objects 
     HittableList worldObjects;
@@ -51,13 +46,20 @@ int main()
         ELOG("Remaining lines: " << j << " ");
 
         for (int i = 0; i < IMAGE_WIDTH; ++i) {
-            auto u = float(i) / (IMAGE_WIDTH - 1);
-            auto v = float(j) / (IMAGE_HEIGHT - 1);
+            vec3 pixelColor(0.0f, 0.0f, 0.0f);
 
-            Ray r(origin, lowerLeftCorner + (u * horizontal) + (v * vertical));
-            vec3 pixelColor = getRayColor(r, worldObjects);
+            for (int s = 0; s < samplesPerPixel; ++s) {
+                auto u = (i + randomFloat()) / (IMAGE_WIDTH - 1);
+                auto v = (j + randomFloat()) / (IMAGE_HEIGHT - 1);
 
-            WriteVecToStream(std::cout, pixelColor);
+                Ray ray = camera.GetRay(u, v);
+
+                // Increment the color for each sample 
+                pixelColor += getRayColor(ray, worldObjects);
+            }
+
+            // PixelColor is averaged during the write for antialiasing 
+            WriteVecToStream(std::cout, pixelColor, samplesPerPixel);
         }
     }
 

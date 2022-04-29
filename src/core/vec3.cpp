@@ -1,5 +1,7 @@
 #include "vec3.hpp"
 
+#include "constants.hpp"
+
 vec3::vec3() : f{0, 0, 0}
 { }
 
@@ -107,9 +109,21 @@ vec3 Normalize(vec3 v)
 
 // Note: In the original this is 'WriteColor'
 // This code is refactored without use of the 'color' and 'point3' aliases
-void WriteVecToStream(std::ostream &out, vec3 pixelColor)
+void WriteVecToStream(std::ostream &out, vec3 pixelColor, int samplesPerPixel)
 {
-    out << static_cast<int>(255.999 * pixelColor.r()) << " "
-        << static_cast<int>(255.999 * pixelColor.g()) << " "
-        << static_cast<int>(255.999 * pixelColor.b()) << "\n";
+    auto r = pixelColor.r();
+    auto g = pixelColor.g();
+    auto b = pixelColor.b();
+
+    // Divide the color by the number of samples (antialiasing)
+    auto scale = 1.0 / samplesPerPixel;
+
+    r *= scale;
+    g *= scale;
+    b *= scale;
+
+    // Write the translated value for each color component
+    out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << " "
+        << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << " "
+        << static_cast<int>(256 * clamp(b, 0.0, 0.999)) << "\n";
 }
