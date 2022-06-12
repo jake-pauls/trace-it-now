@@ -20,7 +20,7 @@ struct HitData
     }
 };
 
-class Hittable 
+class Hittable
 {
 public:
     virtual bool IsHit(const Ray& ray, float tMin, float tMax, HitData& hitData) const = 0;

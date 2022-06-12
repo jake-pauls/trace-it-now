@@ -4,8 +4,8 @@ workspace "trace-it-now"
     language "C++"
     cppdialect "C++20"
 
-    targetdir "build/%{cfg.buildcfg}"
-    objdir "intermediate/%{cfg.buildcfg}"
+    targetdir "%{wks.location}/../build/%{cfg.buildcfg}"
+    objdir "%{wks.location}/../intermediate/%{cfg.buildcfg}"
 
     filter "Debug"
         defines { "DEBUG" }
