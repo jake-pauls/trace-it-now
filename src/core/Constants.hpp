@@ -10,17 +10,17 @@
 #include "Vec3.hpp"
 #include "../Assert.hpp"
 
-// Math Constants
+// Math
 
-#define _INFINITY_  std::numeric_limits<double>::infinity()
-#define _PI_        3.1415926535897932385
-#define _PI_2_      (PI / 2)
+const double _INFINITY_ = std::numeric_limits<double>::infinity();
+const double _PI_       = 3.1415926535897932385;
+const double _PI_2_     = (_PI_ / 2);
 
 // Image Settings
 
-#define ASPECT_RATIO  16.0 / 9.0
-#define IMAGE_WIDTH   400
-#define IMAGE_HEIGHT  static_cast<int>(IMAGE_WIDTH / (ASPECT_RATIO))
+const float ASPECT_RATIO  = 16.0f / 9.0f;
+const int   IMAGE_WIDTH   = 400;
+const int   IMAGE_HEIGHT  = static_cast<int>(IMAGE_WIDTH / (ASPECT_RATIO));
 
 // Utility Functions
 
@@ -30,7 +30,7 @@ inline float randomFloat() { return rand() / (RAND_MAX + 1.0); }
 
 inline float randomRange(float min, float max) { return min + (max - min) * randomFloat(); }
 
-inline float clamp(float x, float min, float max) 
+inline float clamp(float x, float min, float max)
 {
     if (x < min) return min;
     if (x > max) return max;

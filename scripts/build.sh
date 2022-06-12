@@ -3,7 +3,7 @@
 # Execute in the root directory of the project
 
 premake5 gmake2 --file="scripts/premake5.lua"
-make
+make -C "scripts"
 
 # Send pixel data output to .ppm file
 ./build/Debug/trace-it-now > render.ppm

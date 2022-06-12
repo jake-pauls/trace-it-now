@@ -12,9 +12,8 @@ Vec3 getRayColor(const Ray& ray, const Hittable& world)
     Vec3 white(1.0f, 1.0f, 1.0f);
     Vec3 blue(0.5f, 0.7f, 1.0f);
 
-    if (world.IsHit(ray, 0, _INFINITY_, rayHitData)) {
+    if (world.IsHit(ray, 0, _INFINITY_, rayHitData))
         return 0.5 * (rayHitData.normal + white);
-    }
 
     // Use y value of ray to render background
     Vec3 unitDirection = Normalize(ray.Direction);
@@ -42,13 +41,16 @@ int main()
     // Refer to https://en.wikipedia.org/wiki/Netpbm for a breakdown on portable image formats
     std::cout << "P3\n" << IMAGE_WIDTH << " " << IMAGE_HEIGHT << "\n255\n";
 
-    for (int j = IMAGE_HEIGHT - 1; j >= 0; --j) {
+    for (int j = IMAGE_HEIGHT - 1; j >= 0; --j)
+    {
         ELOG("Remaining lines: " << j << " ");
 
-        for (int i = 0; i < IMAGE_WIDTH; ++i) {
+        for (int i = 0; i < IMAGE_WIDTH; ++i)
+        {
             Vec3 pixelColor(0.0f, 0.0f, 0.0f);
 
-            for (int s = 0; s < samplesPerPixel; ++s) {
+            for (int s = 0; s < samplesPerPixel; ++s)
+            {
                 auto u = (i + randomFloat()) / (IMAGE_WIDTH - 1);
                 auto v = (j + randomFloat()) / (IMAGE_HEIGHT - 1);
 

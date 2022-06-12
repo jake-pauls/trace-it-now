@@ -25,4 +25,3 @@ project "trace-it-now"
         "%{wks.location}/../src/**.hpp",
     }
 
-
