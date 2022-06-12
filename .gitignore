@@ -31,6 +31,11 @@
 *.out
 *.app
 
+# Make
+Makefile
+*.make
+
 # Build
 build/**/*
+intermediate/**/*
 
