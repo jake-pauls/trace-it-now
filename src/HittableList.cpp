@@ -1,5 +1,5 @@
-#include "hittable_list.hpp"
-#include "hittable.hpp"
+#include "HittableList.hpp"
+#include "Hittable.hpp"
 
 HittableList::HittableList()
 { }

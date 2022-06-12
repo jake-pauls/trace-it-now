@@ -8,21 +8,21 @@ project(trace-it-now
 )
 
 set(HEADER_FILES
-    src/core/ray.hpp
-    src/core/vec3.hpp
-    src/core/camera.hpp
-    src/core/constants.hpp
-    src/objects/sphere.hpp
-    src/hittable_list.hpp
-    src/hittable.hpp
-    src/assert.hpp
+    src/core/Ray.hpp
+    src/core/Vec3.hpp
+    src/core/Camera.hpp
+    src/core/Constants.hpp
+    src/objects/Sphere.hpp
+    src/HittableList.hpp
+    src/Hittable.hpp
+    src/Assert.hpp
 )
 
 set(SOURCE_FILES
-    src/core/vec3.cpp
-    src/core/camera.cpp
-    src/objects/sphere.cpp
-    src/hittable_list.cpp
+    src/core/Vec3.cpp
+    src/core/Camera.cpp
+    src/objects/Sphere.cpp
+    src/HittableList.cpp
     src/main.cpp
 )
 

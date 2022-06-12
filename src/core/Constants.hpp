@@ -6,9 +6,9 @@
 #include <limits>
 #include <memory>
 
-#include "ray.hpp"
-#include "vec3.hpp"
-#include "../assert.hpp"
+#include "Ray.hpp"
+#include "Vec3.hpp"
+#include "../Assert.hpp"
 
 // Math Constants
 

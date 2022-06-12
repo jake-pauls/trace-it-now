@@ -1,7 +1,7 @@
 #ifndef HittableList_hpp
 #define HittableList_hpp
 
-#include "hittable.hpp"
+#include "Hittable.hpp"
 
 #include <memory>
 #include <vector>

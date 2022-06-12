@@ -1,7 +1,7 @@
 #ifndef Camera_hpp
 #define Camera_hpp
 
-#include "constants.hpp"
+#include "Constants.hpp"
 
 class Camera 
 {
@@ -11,10 +11,10 @@ public:
     Ray GetRay(float u, float v) const;
 
 public:
-    vec3 Origin;
-    vec3 LowerLeftCorner;
-    vec3 Horizontal;
-    vec3 Vertical;
+    Vec3 Origin;
+    Vec3 LowerLeftCorner;
+    Vec3 Horizontal;
+    Vec3 Vertical;
 };
 
 #endif /* Camera_hpp */

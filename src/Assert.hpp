@@ -1,5 +1,5 @@
-#ifndef Assert_hpp 
-#define Assert_hpp 
+#ifndef Assert_hpp
+#define Assert_hpp
 
 #include <iostream>
 #include <cstring>

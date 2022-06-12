@@ -1,17 +1,17 @@
 #include <cmath>
 
-#include "sphere.hpp"
+#include "Sphere.hpp"
 
 Sphere::Sphere()
 { }
 
-Sphere::Sphere(vec3 center, float radius)
+Sphere::Sphere(Vec3 center, float radius)
     : Center(center), Radius(radius)
 { }
 
 bool Sphere::IsHit(const Ray &ray, float tMin, float tMax, HitData &hitData) const
 {
-    vec3 offset = ray.Origin - Center;
+    Vec3 offset = ray.Origin - Center;
 
     // Construct quadratic
     float a = ray.Direction.MagnitudeSquared();
@@ -46,7 +46,7 @@ bool Sphere::IsHit(const Ray &ray, float tMin, float tMax, HitData &hitData) con
     hitData.t = root;
     hitData.point = ray.At(hitData.t);
 
-    vec3 outwardNormal = (hitData.point - Center) / Radius;
+    Vec3 outwardNormal = (hitData.point - Center) / Radius;
     hitData.SetFaceNormal(ray, outwardNormal);
 
     return true;
