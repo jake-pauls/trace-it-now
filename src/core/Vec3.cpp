@@ -45,15 +45,19 @@ Vec3& Vec3::operator/=(const float c)
     return *this *= 1/c;
 }
 
-float Vec3::Magnitude() const
+float Vec3::Length() const
 {
-    return std::sqrt(MagnitudeSquared());
+    return std::sqrt(LengthSquared());
 }
 
-float Vec3::MagnitudeSquared() const
+float Vec3::LengthSquared() const
 {
     return f[0] * f[0] + f[1] * f[1] + f[2] * f[2];
 }
+
+/**
+ * Friend Functions & Operators
+ */
 
 std::ostream& operator<<(std::ostream &out, const Vec3 &v)
 {
@@ -104,7 +108,7 @@ Vec3 Cross(const Vec3 &u, const Vec3 &v)
 
 Vec3 Normalize(Vec3 v)
 {
-    return v / v.Magnitude();
+    return v / v.Length();
 }
 
 // Note: In the original this is 'WriteColor'
@@ -118,12 +122,13 @@ void WriteVecToStream(std::ostream &out, Vec3 pixelColor, int samplesPerPixel)
     // Divide the color by the number of samples (antialiasing)
     auto scale = 1.0 / samplesPerPixel;
 
-    r *= scale;
-    g *= scale;
-    b *= scale;
+    // Gamma-correct for gamma2
+    r = sqrt(scale * r);
+    g = sqrt(scale * g);
+    b = sqrt(scale * b);
 
     // Write the translated value for each color component
-    out << static_cast<int>(256 * clamp(r, 0.0, 0.999)) << " "
-        << static_cast<int>(256 * clamp(g, 0.0, 0.999)) << " "
-        << static_cast<int>(256 * clamp(b, 0.0, 0.999)) << "\n";
+    out << static_cast<int>(256 * Clamp(r, 0.0, 0.999)) << " "
+        << static_cast<int>(256 * Clamp(g, 0.0, 0.999)) << " "
+        << static_cast<int>(256 * Clamp(b, 0.0, 0.999)) << "\n";
 }

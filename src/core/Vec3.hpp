@@ -4,6 +4,8 @@
 #include <cmath>
 #include <iostream>
 
+#include "Constants.hpp"
+
 class Vec3
 {
 public:
@@ -30,27 +32,69 @@ public:
     Vec3& operator/=(const float c);
 
     // Utility Methods
-    float Magnitude() const;
-    float MagnitudeSquared() const;
+    float Length() const;
+    float LengthSquared() const;
 
+    inline static Vec3 Random()
+    {
+        return Vec3(RandomFloat(), RandomFloat(), RandomFloat());
+    }
+
+    inline static Vec3 Random(float min, float max)
+    {
+        return Vec3(RandomFloat(min, max), RandomFloat(min, max), RandomFloat(min, max));
+    }
+
+    // Diffuse by UnitSphere
+    inline static Vec3 RandomInUnitSphere()
+    {
+        while (true)
+        {
+            auto point = Vec3::Random(-1, 1);
+
+            // Reject point if outside sphere
+            if (point.LengthSquared() >= 1)
+                continue;
+
+            return point;
+        }
+    }
+
+    // Diffuse by UnitHemisphere
+    inline static Vec3 RandomInUnitHemisphere(const Vec3& normal)
+    {
+        Vec3 inUnitSphere = RandomInUnitSphere();
+
+        // Point is in the same hemisphere as the normal
+        if (Dot(inUnitSphere, normal) >= 0.0)
+            return inUnitSphere;
+
+        return -inUnitSphere;
+    }
+
+    // Diffuse by UnitVector within UnitSphere (Lambertian Reflection)
+    inline static Vec3 RandomUnitVector()
+    {
+        return Normalize(RandomInUnitSphere());
+    }
 
 public:
     float f[3];
 
-// Additional Vec3 Utilities
-friend std::ostream& operator<<(std::ostream &out, const Vec3 &v);
-friend Vec3 operator+(const Vec3 &u, const Vec3 &v);
-friend Vec3 operator-(const Vec3 &u, const Vec3 &v);
-friend Vec3 operator*(const Vec3 &u, const Vec3 &v);
-friend Vec3 operator*(float c, const Vec3 &v);
-friend Vec3 operator*(const Vec3 &v, float c);
-friend Vec3 operator/(Vec3 v, float c);
+    // Additional Vec3 Utilities
+    friend std::ostream& operator<<(std::ostream &out, const Vec3 &v);
+    friend Vec3 operator+(const Vec3 &u, const Vec3 &v);
+    friend Vec3 operator-(const Vec3 &u, const Vec3 &v);
+    friend Vec3 operator*(const Vec3 &u, const Vec3 &v);
+    friend Vec3 operator*(float c, const Vec3 &v);
+    friend Vec3 operator*(const Vec3 &v, float c);
+    friend Vec3 operator/(Vec3 v, float c);
 
-friend float Dot(const Vec3 &u, const Vec3 &v);
-friend Vec3 Cross(const Vec3 &u, const Vec3 &v);
-friend Vec3 Normalize(Vec3 v);
+    friend float Dot(const Vec3 &u, const Vec3 &v);
+    friend Vec3 Cross(const Vec3 &u, const Vec3 &v);
+    friend Vec3 Normalize(Vec3 v);
 
-friend void WriteVecToStream(std::ostream &out, Vec3 pixelColor, int samplesPerPixel);
+    friend void WriteVecToStream(std::ostream &out, Vec3 pixelColor, int samplesPerPixel);
 };
 
 #endif /* Vec3_hpp */

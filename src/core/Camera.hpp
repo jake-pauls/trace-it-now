@@ -2,8 +2,10 @@
 #define Camera_hpp
 
 #include "Constants.hpp"
+#include "Ray.hpp"
+#include "Vec3.hpp"
 
-class Camera 
+class Camera
 {
 public:
     Camera();

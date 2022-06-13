@@ -14,9 +14,9 @@ bool Sphere::IsHit(const Ray &ray, float tMin, float tMax, HitData &hitData) con
     Vec3 offset = ray.Origin - Center;
 
     // Construct quadratic
-    float a = ray.Direction.MagnitudeSquared();
+    float a = ray.Direction.LengthSquared();
     float halfB = Dot(offset, ray.Direction);
-    float c = offset.MagnitudeSquared() - (Radius * Radius);
+    float c = offset.LengthSquared() - (Radius * Radius);
 
     /**
      * As the equation for detecting a sphere is quadratic (even in a simplified form)

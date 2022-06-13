@@ -6,8 +6,6 @@
 #include <limits>
 #include <memory>
 
-#include "Ray.hpp"
-#include "Vec3.hpp"
 #include "../Assert.hpp"
 
 // Math
@@ -24,13 +22,13 @@ const int   IMAGE_HEIGHT  = static_cast<int>(IMAGE_WIDTH / (ASPECT_RATIO));
 
 // Utility Functions
 
-inline float degToRad(float deg) { return deg * _PI_ / 180.0f; }
+inline float DegToRad(float deg) { return deg * _PI_ / 180.0f; }
 
-inline float randomFloat() { return rand() / (RAND_MAX + 1.0); }
+inline float RandomFloat() { return rand() / (RAND_MAX + 1.0); }
 
-inline float randomRange(float min, float max) { return min + (max - min) * randomFloat(); }
+inline float RandomFloat(float min, float max) { return min + (max - min) * RandomFloat(); }
 
-inline float clamp(float x, float min, float max)
+inline float Clamp(float x, float min, float max)
 {
     if (x < min) return min;
     if (x > max) return max;
