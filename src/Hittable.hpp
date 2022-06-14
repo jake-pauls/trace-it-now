@@ -4,19 +4,22 @@
 #include "core/Vec3.hpp"
 #include "core/Ray.hpp"
 
+class Material;
+
 struct HitData
 {
     float t;
-    Vec3 point;
-    Vec3 normal;
-    bool isFrontFace;
+    Vec3 Point;
+    Vec3 Normal;
+    bool IsFrontFace;
+    std::shared_ptr<Material> Mat;
 
     // Calculate direction of normals at geometry time
     // Ensure normals always point against the incident ray
     inline void SetFaceNormal(const Ray& ray, const Vec3& outwardNormal)
     {
-        isFrontFace = Dot(ray.Direction, outwardNormal) < 0;
-        normal = isFrontFace ? outwardNormal : -outwardNormal;
+        IsFrontFace = Dot(ray.Direction, outwardNormal) < 0;
+        Normal = IsFrontFace ? outwardNormal : -outwardNormal;
     }
 };
 

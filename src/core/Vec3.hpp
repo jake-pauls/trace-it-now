@@ -34,6 +34,7 @@ public:
     // Utility Methods
     float Length() const;
     float LengthSquared() const;
+    bool IsNearZero() const;
 
     inline static Vec3 Random()
     {
@@ -93,6 +94,7 @@ public:
     friend float Dot(const Vec3 &u, const Vec3 &v);
     friend Vec3 Cross(const Vec3 &u, const Vec3 &v);
     friend Vec3 Normalize(Vec3 v);
+    friend Vec3 Reflect(const Vec3& v, const Vec3& n);
 
     friend void WriteVecToStream(std::ostream &out, Vec3 pixelColor, int samplesPerPixel);
 };

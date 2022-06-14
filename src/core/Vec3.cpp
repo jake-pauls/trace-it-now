@@ -55,6 +55,13 @@ float Vec3::LengthSquared() const
     return f[0] * f[0] + f[1] * f[1] + f[2] * f[2];
 }
 
+bool Vec3::IsNearZero() const
+{
+    const float zero = 1e-8;
+
+    return (fabs(f[0]) < zero) && (fabs(f[1]) < zero) && (fabs(f[2]) < zero);
+}
+
 /**
  * Friend Functions & Operators
  */
@@ -109,6 +116,11 @@ Vec3 Cross(const Vec3 &u, const Vec3 &v)
 Vec3 Normalize(Vec3 v)
 {
     return v / v.Length();
+}
+
+Vec3 Reflect(const Vec3& v, const Vec3& n)
+{
+    return v - 2 * Dot(v, n) * n;
 }
 
 // Note: In the original this is 'WriteColor'

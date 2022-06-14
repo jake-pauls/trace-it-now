@@ -9,6 +9,10 @@ Sphere::Sphere(Vec3 center, float radius)
     : Center(center), Radius(radius)
 { }
 
+Sphere::Sphere(Vec3 center, float radius, std::shared_ptr<Material> material)
+    : Center(center), Radius(radius), Mat(material)
+{ }
+
 bool Sphere::IsHit(const Ray &ray, float tMin, float tMax, HitData &hitData) const
 {
     Vec3 offset = ray.Origin - Center;
@@ -44,10 +48,11 @@ bool Sphere::IsHit(const Ray &ray, float tMin, float tMax, HitData &hitData) con
 
     // Construct hit data with applicable root information
     hitData.t = root;
-    hitData.point = ray.At(hitData.t);
+    hitData.Point = ray.At(hitData.t);
 
-    Vec3 outwardNormal = (hitData.point - Center) / Radius;
+    Vec3 outwardNormal = (hitData.Point - Center) / Radius;
     hitData.SetFaceNormal(ray, outwardNormal);
+    hitData.Mat = Mat;
 
     return true;
 }

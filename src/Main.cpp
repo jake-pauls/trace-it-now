@@ -5,6 +5,9 @@
 #include "core/Camera.hpp"
 #include "core/Constants.hpp"
 #include "objects/Sphere.hpp"
+#include "materials/Material.hpp"
+#include "materials/Lambertian.hpp"
+#include "materials/Metal.hpp"
 
 #include "HittableList.hpp"
 
@@ -22,8 +25,13 @@ Vec3 getRayColor(const Ray& ray, const Hittable& world, int depth)
     // ie: rays that reflect at -0.000001 or 0.000001 instead of 0.0
     if (world.IsHit(ray, 0.001, _INFINITY_, rayHitData))
     {
-        Vec3 target = rayHitData.point + rayHitData.normal + Vec3::RandomInUnitHemisphere(rayHitData.normal);
-        return 0.5 * getRayColor(Ray(rayHitData.point, target - rayHitData.point), world, depth - 1);
+        Ray scatteredRay;
+        Vec3 attenuation;
+
+        if (rayHitData.Mat->Scatter(ray, rayHitData, attenuation, scatteredRay))
+            return attenuation * getRayColor(scatteredRay, world, depth - 1);
+
+        return Vec3(0.0f, 0.0f, 0.0f);
     }
 
     // Use y value of ray to render background
@@ -43,11 +51,16 @@ int main()
     // Setup world objects
     HittableList worldObjects;
 
-    // Center sphere
-    worldObjects.Add(std::make_shared<Sphere>(Vec3(0.0f, 0.0f, -1.0f), 0.5f));
+    // Lambertian & Metal Spheres
+    auto materialGround = std::make_shared<Lambertian>(Vec3(0.8f, 0.8f, 0.0f));
+    auto materialCenter = std::make_shared<Lambertian>(Vec3(0.7f, 0.3f, 0.3f));
+    auto materialLeft = std::make_shared<Metal>(Vec3(0.8f, 0.8f, 0.8f));
+    auto materialRight = std::make_shared<Metal>(Vec3(0.8f, 0.6f, 0.2f));
 
-    // Ground sphere
-    worldObjects.Add(std::make_shared<Sphere>(Vec3(0.0f, -100.5f, -1.0f), 100.0f));
+    worldObjects.Add(std::make_shared<Sphere>(Vec3(0.0f, -100.5f, -1.0f), 100.0f, materialGround));
+    worldObjects.Add(std::make_shared<Sphere>(Vec3(0.0f, 0.0f, -1.0f), 0.5f, materialCenter));
+    worldObjects.Add(std::make_shared<Sphere>(Vec3(-1.0f, 0.0f, -1.0f), 0.5f, materialLeft));
+    worldObjects.Add(std::make_shared<Sphere>(Vec3(1.0f, 0.0f, -1.0f), 0.5f, materialRight));
 
     // Create a .ppm file for rendering
     // Refer to https://en.wikipedia.org/wiki/Netpbm for a breakdown on portable image formats
